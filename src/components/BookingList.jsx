@@ -1,22 +1,24 @@
-// BookingList.jsx
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import BookingItem from './BookingItem';
 
 function BookingList() {
   const [bookings, setBookings] = useState([]);
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/bookings/user/USER_ID'); // Replace USER_ID with the actual user ID
-        setBookings(response.data);
-      } catch (error) {
-        console.error('Error fetching bookings:', error);
-        // Handle error, show a message, etc.
-      }
-    };
+  const fetchBookings = async (userId) => {
+    try {
+      
+      
+      const response = await axios.get(`https://booking-system-api-shaunteoh1.sigma-school-full-stack.repl.co/bookings/user/${userId}`);
+      setBookings(response.data);
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    }
+  };
 
-    fetchBookings();
+  useEffect(() => {
+    
+    fetchBookings('1');
   }, []);
 
   return (
@@ -24,9 +26,7 @@ function BookingList() {
       <h2>Booking List</h2>
       <ul className="list-group">
         {bookings.map((booking) => (
-          <li key={booking.id} className="list-group-item">
-            Date: {booking.date}, Time: {booking.time}
-          </li>
+          <BookingItem key={booking.id} booking={booking} fetchBookings={() => fetchBookings('1')} />
         ))}
       </ul>
     </div>

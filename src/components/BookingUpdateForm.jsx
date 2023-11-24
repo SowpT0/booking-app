@@ -2,11 +2,10 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-function BookingForm({ fetchBookings }) {
+function BookingUpdateForm({ booking, fetchBookings, setIsUpdating }) {
   const [formData, setFormData] = useState({
-    date: '',
-    time: '',
-    user_id: '',
+    date: booking.date,
+    time: booking.time,
   });
 
   const handleInputChange = (e) => {
@@ -15,22 +14,19 @@ function BookingForm({ fetchBookings }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await axios.post('https://booking-system-api-shaunteoh1.sigma-school-full-stack.repl.co/bookings', formData);
+      await axios.put(`https://booking-system-api-shaunteoh1.sigma-school-full-stack.repl.co/bookings/${booking.id}`, formData);
       fetchBookings();
-      setFormData({
-        date: '',
-        time: '',
-        user_id: '',
-      });
+      setIsUpdating(false);
     } catch (error) {
-      console.error('Error submitting booking:', error);
+      console.error('Error updating booking:', error);
     }
   };
 
   return (
     <div className="mt-4">
-      <h2>Booking Form</h2>
+      <h2>Update Booking</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Date</label>
@@ -56,24 +52,12 @@ function BookingForm({ fetchBookings }) {
             required
           />
         </div>
-        <div className="form-group">
-          <label>User ID</label>
-          <input
-            type="text"
-            className="form-control"
-            name="user_id"
-            value={formData.user_id}
-            onChange={handleInputChange}
-            placeholder="Enter User ID"
-            required
-          />
-        </div>
         <button type="submit" className="btn btn-primary">
-          Submit Booking
+          Update Booking
         </button>
       </form>
     </div>
   );
 }
 
-export default BookingForm;
+export default BookingUpdateForm;
