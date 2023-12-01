@@ -7,8 +7,8 @@ function BookingList() {
 
   const fetchBookings = async (userId) => {
     try {
-      
-      
+
+
       const response = await axios.get(`https://booking-system-api-shaunteoh1.sigma-school-full-stack.repl.co/bookings/user/${userId}`);
       setBookings(response.data);
     } catch (error) {
@@ -17,7 +17,7 @@ function BookingList() {
   };
 
   useEffect(() => {
-    
+
     fetchBookings('1');
   }, []);
 
@@ -34,5 +34,3 @@ function BookingList() {
 }
 
 export default BookingList;
-
-

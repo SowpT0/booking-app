@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -6,8 +5,6 @@ function BookingUpdateForm({ booking, fetchBookings, setIsUpdating }) {
   const [formData, setFormData] = useState({
     date: booking.date,
     time: booking.time,
-    email: booking.email,
-    phone_number: booking.phone_number,
   });
 
   const handleInputChange = (e) => {
@@ -51,30 +48,6 @@ function BookingUpdateForm({ booking, fetchBookings, setIsUpdating }) {
             value={formData.time}
             onChange={handleInputChange}
             placeholder="Enter Time"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            className="form-control"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="Enter Email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Phone Number</label>
-          <input
-            type="tel"
-            className="form-control"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleInputChange}
-            placeholder="Enter Phone Number"
             required
           />
         </div>

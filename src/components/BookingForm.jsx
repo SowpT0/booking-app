@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -7,8 +6,6 @@ function BookingForm({ fetchBookings }) {
     date: '',
     time: '',
     user_id: '',
-    email: '',
-    phone_number: '',
   });
 
   const handleInputChange = (e) => {
@@ -17,7 +14,6 @@ function BookingForm({ fetchBookings }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData)
     try {
       await axios.post('https://booking-system-api-shaunteoh1.sigma-school-full-stack.repl.co/bookings', formData);
       fetchBookings();
@@ -25,8 +21,6 @@ function BookingForm({ fetchBookings }) {
         date: '',
         time: '',
         user_id: '',
-        email: '',
-        phone_number: '',
       });
     } catch (error) {
       console.error('Error submitting booking:', error);
@@ -70,30 +64,6 @@ function BookingForm({ fetchBookings }) {
             value={formData.user_id}
             onChange={handleInputChange}
             placeholder="Enter User ID"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="text"
-            className="form-control"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="Enter Email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Phone Number</label>
-          <input
-            type="text"
-            className="form-control"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleInputChange}
-            placeholder="Enter Phone Number"
             required
           />
         </div>
